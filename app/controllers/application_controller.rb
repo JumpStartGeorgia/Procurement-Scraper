@@ -65,6 +65,11 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		admin_path
 	end
 
+  def valid_role?(role)
+    redirect_to root_path, :notice => t('app.msgs.not_authorized') if !current_user || !current_user.role?(role)
+  end
+
+
   #######################
 	def render_not_found(exception)
 		ExceptionNotifier::Notifier
