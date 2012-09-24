@@ -8,7 +8,7 @@
 		<% if current_user.role?(:admin) %>
 			<%= f.input :role, :as => :select, :collection => User::ROLES.map{|x| [x.humanize, x.to_s]}  %>
 		<% else %>
-			<%= f.hidden_field :locale , :value => User::ROLES[0] %>
+			<%= f.hidden_field :role , :value => User::ROLES[0] %>
 		<% end %>
 
 	<% end %>
