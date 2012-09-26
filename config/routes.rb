@@ -4,8 +4,8 @@ BootstrapStarter::Application.routes.draw do
 	#--------------------------------
 	scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
 
+		match '/admin', :to => 'admin#index', :as => :admin, :via => :get
 		devise_for :users
-
 		namespace :admin do
 			resources :users
 		end
