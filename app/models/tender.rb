@@ -23,4 +23,52 @@ class Tender < ActiveRecord::Base
   
   scope :recent, order("tender_announcement_date desc").limit(5)
 
+  attr_accessor :sum_estimated_value, :count_tender_status
+  
+  ####################
+  ### special attributes
+  ####################
+  def cpv_name
+    return self.cpv_code[self.cpv_code.index("-")+1, self.cpv_code.length]
+  end
+
+  ####################
+  ### aggregate queries
+  ####################
+  # get top estimated values by cpv code
+  def self.top_cpv_estimated_values(limit)
+    sql = "select cpv_code, sum(estimated_value) as sum_estimated_value "
+    sql << "from tenders "
+    sql << "group by cpv_code "
+    sql << "order by sum_estimated_value desc "
+    sql << "limit :limit " if limit
+    
+    find_by_sql(sql, :limit => limit)
+  end
+
+  # get proportion of tender status 
+  def self.tender_status_proportional
+    values = []
+    sql = "select tender_status, count(*) as count_tender_status "
+    sql << "from tenders "
+    sql << "group by tender_status "
+    sql << "order by count_tender_status desc, tender_status asc "
+    
+    query = find_by_sql(sql)
+    
+    if query && !query.empty?
+      total = query.map{|x| x.count_tender_status}.inject{|sum,x| sum + x }
+      
+      query.each do |item|
+        hash = Hash.new
+        hash[:tender_status] = item.tender_status
+        hash[:number] = item.count_tender_status
+        hash[:percent] = total.to_f / item.count_tender_status * 100
+        values << hash
+      end
+    end
+    return values
+  end
+  
+
 end
