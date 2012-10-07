@@ -1,7 +1,6 @@
 class CreateTenders < ActiveRecord::Migration
   def change
     create_table :tenders do |t|
-      t.string :url_id
       t.integer :procurring_entity_id
       t.string :tender_type
       t.string :tender_registration_number
@@ -20,7 +19,6 @@ class CreateTenders < ActiveRecord::Migration
     end
     
     
-    add_index :tenders, :procurring_entity_id
     add_index :tenders, :procurring_entity_id
     add_index :tenders, :tender_type
     add_index :tenders, :tender_status

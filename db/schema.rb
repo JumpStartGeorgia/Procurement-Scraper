@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121006145244) do
+ActiveRecord::Schema.define(:version => 20121007092508) do
 
   create_table "bidders", :force => true do |t|
     t.integer  "tender_id"
@@ -69,12 +69,14 @@ ActiveRecord::Schema.define(:version => 20121006145244) do
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url_id"
   end
 
   add_index "tenders", ["estimated_value"], :name => "index_tenders_on_estimated_value"
   add_index "tenders", ["procurring_entity_id"], :name => "index_tenders_on_procurring_entity_id"
   add_index "tenders", ["tender_status"], :name => "index_tenders_on_tender_status"
   add_index "tenders", ["tender_type"], :name => "index_tenders_on_tender_type"
+  add_index "tenders", ["url_id"], :name => "index_tenders_on_url_id"
   add_index "tenders", ["winning_bid_id"], :name => "index_tenders_on_winning_bid_id"
 
   create_table "users", :force => true do |t|
