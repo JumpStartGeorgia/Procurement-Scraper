@@ -1,4 +1,5 @@
 class RootController < ApplicationController
+  require 'scraper_file'
 
   def index
     @recent_tenders = Tender.recent
@@ -7,5 +8,9 @@ class RootController < ApplicationController
     gon.tender_pie_chart = @tender_pie
   end
 
+  def process_json
+    msg = ScraperFile.process
+    redirect_to root_path, notice: msg
+  end
 
 end

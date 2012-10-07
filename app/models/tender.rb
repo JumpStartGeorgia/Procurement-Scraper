@@ -5,7 +5,8 @@
   has_many :bidders, :dependent => :destroy
   has_one :winning_bid, :class_name => 'Bid', :foreign_key => 'winning_bid_id'
 
-  attr_accessible :url_id, :procurring_entity_id,
+  attr_accessible :url_id, 
+      :procurring_entity_id,
       :tender_type,
       :tender_registration_number,
       :tender_status,
@@ -23,18 +24,18 @@
   
   scope :recent, order("tender_announcement_date desc").limit(5)
 
-  attr_accessor :sum_estimated_value, :count_tender_status
+  attr_accessor :sum_estimated_value, :count_tender_status, :procurring_entity_name
   
-  ####################
+  ############################################################
   ### special attributes
-  ####################
+  ############################################################
   def cpv_name
     return self.cpv_code[self.cpv_code.index("-")+1, self.cpv_code.length]
   end
 
-  ####################
+  ############################################################
   ### aggregate queries
-  ####################
+  ############################################################
   # get top estimated values by cpv code
   def self.top_cpv_estimated_values(limit)
     sql = "select cpv_code, sum(estimated_value) as sum_estimated_value "
