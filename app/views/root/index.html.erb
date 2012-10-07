@@ -14,7 +14,7 @@
     <h3>New Tenders</<h3>
     <ul>
     <% @recent_tenders.each do |tender| %>
-        <li><%= link_to tender.tender_registration_number, '#' %></li>
+        <li><%= link_to tender.tender_registration_number, tender %></li>
     <% end %>
     </ul>
   </div>
