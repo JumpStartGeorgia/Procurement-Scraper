@@ -5,7 +5,8 @@ module ScraperFile
 
   def self.process
     start = Time.now
-    
+    msg = nil
+    msgs = []
     I18n.locale = :en # do this so formating of floats and dates is correct when reading in json
     # get the json files
     tender_file_path = "#{Rails.root}/public/system/#{FILE_TENDER}"    
@@ -54,16 +55,18 @@ module ScraperFile
             tender.procurring_entity_id = organization.id
           else
             Rails.logger.debug "***** procuring entity was not found for this tender record #{index} *****"
-		        raise ActiveRecord::Rollback
-		        return "ERROR: Procuring Entity record for tender json record #{index} could not be found in the procuring entity json file."
+		        msgs << "ERROR: Procuring Entity record for tender json record #{index} could not be found in the procuring entity json file."
+#		        raise ActiveRecord::Rollback
+#		        break
           end
 
           if tender.valid?
             tender.save
           else
             Rails.logger.debug "***** tender was not valid: #{tender.errors} *****"
+		        msg = "ERROR: An error occurred while saving json record #{index}"
 		        raise ActiveRecord::Rollback
-		        return "ERROR: An error occurred while saving json record #{index}"
+		        break
           end
         end
       end
@@ -71,7 +74,10 @@ module ScraperFile
     end
     
     Rails.logger.debug "###### total time = #{Time.now - start} seconds"
-    return "#{json_tender.length} Tenders were saved in #{Time.now - start} seconds"
+    msg = "#{json_tender.length} Tenders were saved in #{Time.now - start} seconds" if msg.nil?
+    Rails.logger.debug "msg = #{msg}"
+    Rails.logger.debug "msgs = #{msgs}"
+    return msg
   end
 
 end
