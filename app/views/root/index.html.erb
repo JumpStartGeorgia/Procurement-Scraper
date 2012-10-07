@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" id="top-row">
   <div class="span7">
 <p>The ProcWatch Project enables citizens to understand how the Georgian government spends money. Georgian ministries and offices pays companies and organizations to render services to perform its daily functions and implement projects dictated by public policy. To ensure proper use, it is neccessary for the public to be able to not only access the information, but be able pose questions.</p>
 
@@ -9,17 +9,17 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="span4">
+<div class="row" id="mid-row">
+  <div class="span4 latest-box">
     <h3>New Tenders</<h3>
     <ul>
     <% @recent_tenders.each do |tender| %>
-        <li><%= tender.tender_registration_number %></li>
+        <li><%= link_to tender.tender_registration_number, '#' %></li>
     <% end %>
     </ul>
   </div>
   
-  <div class="span4">
+  <div class="span4 latest-box">
     <h3>New Bids</<h3>
     <ul>
     <% @recent_tenders.each do |tender| %>
@@ -28,7 +28,7 @@
     </ul>
   </div>
   
-  <div class="span4">
+  <div class="span4 latest-box">
     <h3>New Companies</<h3>
     <ul>
     <% @recent_tenders.each do |tender| %>
