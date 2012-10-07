@@ -30,19 +30,38 @@ class Tender < ActiveRecord::Base
   def cpv_name
     return self.cpv_code[self.cpv_code.index("-")+1, self.cpv_code.length]
   end
+  
+  def sum_estimated_value_formatted
+    if self[:sum_estimated_value]
+      return ActionController::Base.helpers.number_with_delimiter(ActionController::Base.helpers.number_with_precision(self[:sum_estimated_value]))
+    end
+  end
 
   ############################################################
   ### aggregate queries
   ############################################################
   # get top estimated values by cpv code
   def self.top_cpv_estimated_values(limit)
+    values = []
     sql = "select cpv_code, sum(estimated_value) as sum_estimated_value "
     sql << "from tenders "
     sql << "group by cpv_code "
     sql << "order by sum_estimated_value desc "
     sql << "limit :limit " if limit
     
-    find_by_sql(sql, :limit => limit)
+    query = find_by_sql([sql, :limit => limit])
+    
+    if query && !query.empty?
+      query.each do |item|
+        hash = Hash.new
+        hash[:cpv_code] = item.cpv_code
+        hash[:cpv_name] = item.cpv_name
+        hash[:sum_estimated_value] = item.sum_estimated_value_formatted
+        values << hash
+      end
+    end
+    
+    return values
   end
 
   # get proportion of tender status 
@@ -56,13 +75,13 @@ class Tender < ActiveRecord::Base
     query = find_by_sql(sql)
     
     if query && !query.empty?
-      total = query.map{|x| x.count_tender_status}.inject{|sum,x| sum + x }
+      total = query.map{|x| x[:count_tender_status]}.inject{|sum,x| sum + x }
       
       query.each do |item|
         hash = Hash.new
         hash[:tender_status] = item.tender_status
-        hash[:number] = item.count_tender_status
-        hash[:percent] = total.to_f / item.count_tender_status * 100
+        hash[:number] = item[:count_tender_status]
+        hash[:percent] = total.to_f / item[:count_tender_status] * 100
         values << hash
       end
     end
