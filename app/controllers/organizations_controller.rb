@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   def index
-    @organizations = Organization.paginate(:page => params[:page])
+    @organizations = Organization.order_by_name.paginate(:page => params[:page])
   end
 
   def show
