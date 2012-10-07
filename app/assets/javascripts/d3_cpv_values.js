@@ -20,11 +20,11 @@ var bars = vis.selectAll("g.bar")
 
 bars.append("svg:rect")
     .attr("fill", "#666" )
-    .attr("width", function(d, i) { return gon.top_cpv_estimated_values[i].sum_value * w / 300000; })
+    .attr("width", function(d, i) { return gon.top_cpv_estimated_values[i].sum_value * w / 65000000; })
     .attr("height", y.rangeBand());
 
 bars.append("svg:text")
-    .attr("x", function(d, i) { return gon.top_cpv_estimated_values[i].sum_value * w / 300000; })
+    .attr("x", function(d, i) { return gon.top_cpv_estimated_values[i].sum_value * w / 65000000; })
     .attr("y", y.rangeBand())
     .attr("dx", -3)
     .attr("dy", "-0.50em")
@@ -43,7 +43,7 @@ bars.append("svg:text")
 
 
 var rules = vis.selectAll("g.rule")
-    .data(x.ticks(7))
+    .data(x.ticks(4))
   .enter().append("svg:g")
     .attr("class", "rule")
     .attr("transform", function(d) { return "translate(" + x(d) + ", 0)"; });
