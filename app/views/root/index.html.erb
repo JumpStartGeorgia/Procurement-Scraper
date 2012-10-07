@@ -1,1 +1,19 @@
-Hi!
+<div class="row">
+  <div class="span12">
+The ProcWatch Project enables citizens to understand how their government spends money.
+  </div>
+</div>
+<div class="row">
+
+  <% unless @recent_tenders.empty? || @recent_tenders.nil? %>
+  <div class="span4">
+    <h3>New Tenders</<h3>
+    <ul>
+    <% @recent_tenders.each do |tender| %>
+        <li><%= tender.tender_registration_number %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+</div>
