@@ -33,6 +33,7 @@ bars.append("svg:text")
     .text(function(d, i) { return gon.top_cpv_estimated_values[i].sum_formatted_value; });
 
 bars.append("svg:text")
+    .attr("class", "bar_label")
     .attr("x", 0)
     .attr("y", 10 + y.rangeBand() / 2)
     .attr("dx", -6)
@@ -63,5 +64,12 @@ rules.append("svg:text")
     .attr("text-anchor", "middle")
     .text(x.tickFormat(1));
 
-
+/*
+  $('svg text.bar_label').tipsy({
+      title: function() {
+        var d = this.__data__;
+        return d["cpv_name"];
+      }
+    });
+*/
 }
