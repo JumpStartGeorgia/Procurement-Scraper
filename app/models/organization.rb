@@ -9,4 +9,8 @@ class Organization < ActiveRecord::Base
 
   validates :url_id, :label_id, :presence => true
   
+  scope :recent, order("name desc").limit(5)
+  
+  # number of items per page for pagination
+	self.per_page = 20
 end

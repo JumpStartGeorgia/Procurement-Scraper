@@ -26,6 +26,9 @@
 
   attr_accessor :sum_estimated_value, :count_tender_status, :procurring_entity_name
   
+  # number of items per page for pagination
+	self.per_page = 20
+	
   ############################################################
   ### special attributes
   ############################################################

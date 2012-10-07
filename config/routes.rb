@@ -1,7 +1,10 @@
 BootstrapStarter::Application.routes.draw do
-  get "tenders/index"
+  
+  
 
-  get "tenders/show"
+  get "organizations/index"
+
+  get "organizations/show"
 
 	#--------------------------------
 	# all resources should be within the scope block below
@@ -14,6 +17,8 @@ BootstrapStarter::Application.routes.draw do
 			resources :users
 		end
 
+    resources :tenders
+    resources :organizations
 
 		match '/process_json', :to => 'root#process_json', :as => :process_json, :via => :get
 		root :to => 'root#index'

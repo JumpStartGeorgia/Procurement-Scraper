@@ -7,5 +7,5 @@ class Bid < ActiveRecord::Base
       
   validates :bidder_id, :bid_date, :value, :presence => true
   
-  # scope :recent, order("bid_date desc").limit(5)
+  scope :recent, order("bid_date desc").limit(5)
 end

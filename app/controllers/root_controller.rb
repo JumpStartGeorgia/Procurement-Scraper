@@ -3,9 +3,10 @@ class RootController < ApplicationController
 
   def index
     @recent_tenders = Tender.recent
-#    @recent_bids = Bid.recent.includes()
-#    @tender_pie = Tender.tender_status_proportional
-#    gon.tender_pie_chart = @tender_pie
+    @recent_bids = Bid.recent
+    @recent_orgs = Organization.recent
+    @tender_pie = Tender.tender_status_proportional
+    gon.tender_pie_chart = @tender_pie
 
     gon.top_cpv_estimated_values = Tender.top_cpv_estimated_values(10)
   end
