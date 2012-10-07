@@ -97,7 +97,7 @@
         hash = Hash.new
         hash[:tender_status] = item.tender_status
         hash[:number] = item[:count_tender_status]
-        hash[:percent] = item[:count_tender_status].to_f / total * 100
+        hash[:percent] = ActionController::Base.helpers.number_to_percentage(item[:count_tender_status].to_f / total * 100)
         values << hash
       end
     end
