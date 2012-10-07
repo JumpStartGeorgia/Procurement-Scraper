@@ -30,7 +30,9 @@
   ### special attributes
   ############################################################
   def cpv_name
-    return self.cpv_code[self.cpv_code.index("-")+1, self.cpv_code.length]
+    if !self.cpv_code.nil? && !self.cpv_code.empty?
+      return self.cpv_code[self.cpv_code.index("-")+1, self.cpv_code.length]
+    end
   end
   
   def sum_estimated_value_formatted
@@ -78,12 +80,12 @@
     
     if query && !query.empty?
       total = query.map{|x| x[:count_tender_status]}.inject{|sum,x| sum + x }
-      
+puts "@@@@@@@@@@@total = #{total}"      
       query.each do |item|
         hash = Hash.new
         hash[:tender_status] = item.tender_status
         hash[:number] = item[:count_tender_status]
-        hash[:percent] = total.to_f / item[:count_tender_status] * 100
+        hash[:percent] = item[:count_tender_status].to_f / total * 100
         values << hash
       end
     end
