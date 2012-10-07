@@ -1,4 +1,8 @@
 BootstrapStarter::Application.routes.draw do
+  get "tenders/index"
+
+  get "tenders/show"
+
 	#--------------------------------
 	# all resources should be within the scope block below
 	#--------------------------------

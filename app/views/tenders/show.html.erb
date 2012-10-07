@@ -1,0 +1,45 @@
+<%- model_class = Tender -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:procurring_entity_id) %>:</strong></dt>
+  <dd><%= @tender.procurring_entity_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:tender_type) %>:</strong></dt>
+  <dd><%= @tender.tender_type %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:tender_registration_number) %>:</strong></dt>
+  <dd><%= @tender.tender_registration_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:tender_status) %>:</strong></dt>
+  <dd><%= @tender.tender_status %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:tender_announcement_date) %>:</strong></dt>
+  <dd><%= @tender.tender_announcement_date %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:bid_start_date) %>:</strong></dt>
+  <dd><%= @tender.bid_start_date %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:bid_end_date) %>:</strong></dt>
+  <dd><%= @tender.bid_end_date %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:estimated_value) %>:</strong></dt>
+  <dd><%= @tender.estimated_value %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:include_vat) %>:</strong></dt>
+  <dd><%= @tender.include_vat %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:cpv_code) %>:</strong></dt>
+  <dd><%= @tender.cpv_code %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:winning_bid_id) %>:</strong></dt>
+  <dd><%= @tender.winning_bid_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:start_date) %>:</strong></dt>
+  <dd><%= @tender.start_date %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:end_date) %>:</strong></dt>
+  <dd><%= @tender.end_date %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              tenders_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_tender_path(@tender), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              tender_path(@tender),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

@@ -142,20 +142,28 @@ div#form-ka {
 
 /* footer */
 footer {
-	margin-top: -54px; /* negative value of footer height */
+	margin-top: -64px; /* negative value of footer height */
 	min-height: 41px !important;
 	background: #D4D4D4 !important;
-	padding: 0 20px;
+	padding: 10px 20px;
 	padding-top: 13px;
 	font-size: 10pt;
 }
 
 footer div#left {
-	margin: 0 !important;
+	margin: 0px 0px 10px 0px;
 	float: left;
 	width: 30%;
-	margin-top: 20px;
-  padding-top: 3px;
+	text-align: left;
+}
+footer div#left ul li {
+	display:inline;
+}
+footer div#left #ti_link_text{
+	text-align: left;
+}
+footer div#left #ti_logo{
+	text-align: left;
 }
 footer a:hover {
 	background-color: #D4D4D4;

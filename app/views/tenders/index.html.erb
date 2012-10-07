@@ -1,0 +1,60 @@
+<%- model_class = Tender -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:procurring_entity_id) %></th>
+      <th><%= model_class.human_attribute_name(:tender_type) %></th>
+      <th><%= model_class.human_attribute_name(:tender_registration_number) %></th>
+      <th><%= model_class.human_attribute_name(:tender_status) %></th>
+      <th><%= model_class.human_attribute_name(:tender_announcement_date) %></th>
+      <th><%= model_class.human_attribute_name(:bid_start_date) %></th>
+      <th><%= model_class.human_attribute_name(:bid_end_date) %></th>
+      <th><%= model_class.human_attribute_name(:estimated_value) %></th>
+      <th><%= model_class.human_attribute_name(:include_vat) %></th>
+      <th><%= model_class.human_attribute_name(:cpv_code) %></th>
+      <th><%= model_class.human_attribute_name(:winning_bid_id) %></th>
+      <th><%= model_class.human_attribute_name(:start_date) %></th>
+      <th><%= model_class.human_attribute_name(:end_date) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tenders.each do |tender| %>
+      <tr>
+        <td><%= link_to tender.id, tender_path(tender) %></td>
+        <td><%= tender.procurring_entity_id %></td>
+        <td><%= tender.tender_type %></td>
+        <td><%= tender.tender_registration_number %></td>
+        <td><%= tender.tender_status %></td>
+        <td><%= tender.tender_announcement_date %></td>
+        <td><%= tender.bid_start_date %></td>
+        <td><%= tender.bid_end_date %></td>
+        <td><%= tender.estimated_value %></td>
+        <td><%= tender.include_vat %></td>
+        <td><%= tender.cpv_code %></td>
+        <td><%= tender.winning_bid_id %></td>
+        <td><%= tender.start_date %></td>
+        <td><%= tender.end_date %></td>
+        <td><%=l tender.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_tender_path(tender), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      tender_path(tender),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_tender_path,
+            :class => 'btn btn-primary' %>

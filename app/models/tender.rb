@@ -1,4 +1,4 @@
-class Tender < ActiveRecord::Base
+  class Tender < ActiveRecord::Base
 
   belongs_to :procurring_entity, :class_name => 'Organization', :foreign_key => 'procurring_entity_id'
   has_many :tender_cpv_classifiers, :dependent => :destroy
@@ -21,6 +21,8 @@ class Tender < ActiveRecord::Base
       :end_date
 
   validates :url_id, :procurring_entity_id, :tender_type, :tender_registration_number, :tender_status, :presence => true
+  
+  scope :recent, order("tender_announcement_date desc").limit(5)
 
   attr_accessor :sum_estimated_value, :count_tender_status, :procurring_entity_name
   
