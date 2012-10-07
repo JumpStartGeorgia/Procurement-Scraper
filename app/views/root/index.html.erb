@@ -10,7 +10,7 @@
 </div>
 
 <div class="row" id="mid-row">
-  <div class="span4 latest-box">
+  <div class="span4 latest-box tender-box">
     <h3>New Tenders</<h3>
     <ul>
     <% @recent_tenders.each do |tender| %>
@@ -18,21 +18,21 @@
     <% end %>
     </ul>
   </div>
-  
-  <div class="span4 latest-box">
+<!--
+  <div class="span4 latest-box bid-box">
     <h3>New Bids</<h3>
     <ul>
-    <% @recent_tenders.each do |tender| %>
-        <li><%= tender.tender_registration_number %></li>
+    <% @recent_bids.each do |bid| %>
+        <li><%=  %>: <%=  %></li>
     <% end %>
     </ul>
   </div>
-  
-  <div class="span4 latest-box">
+-->
+  <div class="span4 latest-box org-box">
     <h3>New Companies</<h3>
     <ul>
-    <% @recent_tenders.each do |tender| %>
-        <li><%= tender.tender_registration_number %></li>
+    <% @recent_orgs.each do |org| %>
+        <li><%= link_to org.name, org, :method => :get %> <%= org.country %></li>
     <% end %>
     </ul>
   </div>

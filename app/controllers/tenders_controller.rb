@@ -4,6 +4,7 @@ class TendersController < ApplicationController
   end
 
   def show
+    @tender = Tender.find(params[:id])
   end
 
 end
