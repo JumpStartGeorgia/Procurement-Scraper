@@ -29,6 +29,12 @@
   ############################################################
   ### special attributes
   ############################################################
+  def cpv_number
+    if !self.cpv_code.nil? && !self.cpv_code.empty?
+      return self.cpv_code[1,self.cpv_code.index("-")-1]
+    end
+  end
+  
   def cpv_name
     if !self.cpv_code.nil? && !self.cpv_code.empty?
       return self.cpv_code[self.cpv_code.index("-")+1, self.cpv_code.length]
@@ -49,6 +55,7 @@
     values = []
     sql = "select cpv_code, sum(estimated_value) as sum_estimated_value "
     sql << "from tenders "
+    sql << "where cpv_code is not null and length(cpv_code) > 0 "
     sql << "group by cpv_code "
     sql << "order by sum_estimated_value desc "
     sql << "limit :limit " if limit
@@ -58,9 +65,10 @@
     if query && !query.empty?
       query.each do |item|
         hash = Hash.new
-        hash[:cpv_code] = item.cpv_code
+        hash[:cpv_number] = item.cpv_number
         hash[:cpv_name] = item.cpv_name
-        hash[:sum_estimated_value] = item.sum_estimated_value_formatted
+        hash[:sum_value] = item[:sum_estimated_value].to_f
+        hash[:sum_formatted_value] = item.sum_estimated_value_formatted
         values << hash
       end
     end
@@ -80,7 +88,7 @@
     
     if query && !query.empty?
       total = query.map{|x| x[:count_tender_status]}.inject{|sum,x| sum + x }
-puts "@@@@@@@@@@@total = #{total}"      
+
       query.each do |item|
         hash = Hash.new
         hash[:tender_status] = item.tender_status
