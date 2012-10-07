@@ -1,11 +1,15 @@
 <div class="row">
-  <div class="span12">
-The ProcWatch Project enables citizens to understand how their government spends money.
+  <div class="span7">
+<p>The ProcWatch Project enables citizens to understand how the Georgian government spends money. Georgian ministries and offices pays companies and organizations to render services to perform its daily functions and implement projects dictated by public policy. To ensure proper use, it is neccessary for the public to be able to not only access the information, but be able pose questions.</p>
+
+<p>The current Georgain government's online procurement database is unable to accomodate the questions civil society needs to pose. This project seeks to overcome that limitation by providing a more flexible interface to the vast amount of procurement information that exists and is publically available.</p>
+  </div>
+  <div class="span4" id="front-box">
+    <p>How is Georgia spending <span>your</span> money?<?p>
   </div>
 </div>
-<div class="row">
 
-  <% unless @recent_tenders.empty? || @recent_tenders.nil? %>
+<div class="row">
   <div class="span4">
     <h3>New Tenders</<h3>
     <ul>
@@ -14,6 +18,26 @@ The ProcWatch Project enables citizens to understand how their government spends
     <% end %>
     </ul>
   </div>
-  <% end %>
+  
+  <div class="span4">
+    <h3>New Bids</<h3>
+    <ul>
+    <% @recent_tenders.each do |tender| %>
+        <li><%= tender.tender_registration_number %></li>
+    <% end %>
+    </ul>
+  </div>
+  
+  <div class="span4">
+    <h3>New Companies</<h3>
+    <ul>
+    <% @recent_tenders.each do |tender| %>
+        <li><%= tender.tender_registration_number %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>
 
+<div class="row">
+  <div id="tender_piechart"></div>
 </div>

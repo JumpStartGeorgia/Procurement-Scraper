@@ -1,4 +1,4 @@
-class Tender < ActiveRecord::Base
+  class Tender < ActiveRecord::Base
 
   belongs_to :procurring_entity, :class_name => 'Organization', :foreign_key => 'procurring_entity_id'
   has_many :tender_cpv_classifiers, :dependent => :destroy
