@@ -11,6 +11,7 @@ BootstrapStarter::Application.routes.draw do
 		end
 
 
+		match '/process_json', :to => 'root#process_json', :as => :process_json, :via => :get
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever
 	end
