@@ -35,11 +35,14 @@ class ApplicationController < ActionController::Base
 	def is_browser_supported?
 		user_agent = UserAgent.parse(request.user_agent)
 logger.debug "////////////////////////// BROWSER = #{user_agent}"
+=begin
 		if SUPPORTED_BROWSERS.any? { |browser| user_agent < browser }
 			# browser not supported
 logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			render "layouts/unsupported_browser", :layout => false
 		end
+=end		
+logger.debug "////////////////////////// BROWSER TEST NOT REQUIRED"
 	end
 
 
