@@ -1,13 +1,13 @@
 if (gon.top_cpv_estimated_values){
 var w = 400,
     h = 260,
-    labelpad = 75,
-    x = d3.scale.linear().domain([0, 6]).range([0, w]),
+    labelpad = 10,
+    x = d3.scale.linear().domain([0, d3.max(gon.top_cpv_estimated_values, function(d) {return d.sum_value;})]).range([0, w]),
     y = d3.scale.ordinal().domain(d3.range(gon.top_cpv_estimated_values.length)).rangeBands([0, h], .2);
 
 var vis = d3.select("#top_cpv_estimated_values_barchart")
   .append("svg:svg")
-    .attr("width", w + 40)
+    .attr("width", w + 100)
     .attr("height", h + 20)
   .append("svg:g")
     .attr("transform", "translate(75,0)");
@@ -20,11 +20,11 @@ var bars = vis.selectAll("g.bar")
 
 bars.append("svg:rect")
     .attr("fill", "#666" )
-    .attr("width", function(d, i) { return gon.top_cpv_estimated_values[i].sum_value * w / 6; })
+    .attr("width", function(d, i) { return gon.top_cpv_estimated_values[i].sum_value * w / 300000; })
     .attr("height", y.rangeBand());
 
 bars.append("svg:text")
-    .attr("x", function(d, i) { return gon.top_cpv_estimated_values[i].sum_value * w / 6; })
+    .attr("x", function(d, i) { return gon.top_cpv_estimated_values[i].sum_value * w / 300000; })
     .attr("y", y.rangeBand())
     .attr("dx", -3)
     .attr("dy", "-0.50em")
@@ -42,7 +42,7 @@ bars.append("svg:text")
 
 
 var rules = vis.selectAll("g.rule")
-    .data(x.ticks(5))
+    .data(x.ticks(7))
   .enter().append("svg:g")
     .attr("class", "rule")
     .attr("transform", function(d) { return "translate(" + x(d) + ", 0)"; });
@@ -62,5 +62,6 @@ rules.append("svg:text")
     .attr("dy", ".61em")
     .attr("text-anchor", "middle")
     .text(x.tickFormat(1));
+
 
 }
