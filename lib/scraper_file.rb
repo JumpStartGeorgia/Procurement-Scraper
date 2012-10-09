@@ -55,7 +55,7 @@ module ScraperFile
             tender.procurring_entity_id = organization.id
           else
             Rails.logger.debug "***** procuring entity was not found for this tender record #{index} *****"
-		        msgs << tender.url_id
+		        msgs << [tender.url_id, item["procuringEntityID"]]
 #		        raise ActiveRecord::Rollback
 #		        break
           end
